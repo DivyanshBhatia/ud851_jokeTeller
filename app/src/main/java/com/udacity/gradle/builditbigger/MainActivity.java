@@ -1,7 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,9 +49,12 @@ public class MainActivity extends AppCompatActivity {
         /*Toast.makeText(this, jokeFetcher.getJoke(), Toast.LENGTH_SHORT).show();*/
 
         //Solution of Step 2
-        Intent jokesIntent=new Intent(this,JokesActivity.class);
+        /*Intent jokesIntent=new Intent(this,JokesActivity.class);
         jokesIntent.putExtra(JOKE_STRING,jokeFetcher.getJoke());
-        startActivity(jokesIntent);
+        startActivity(jokesIntent);*/
+
+        //Solution of Step 3 learning via GCE
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 
 
