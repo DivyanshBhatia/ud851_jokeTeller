@@ -4,7 +4,13 @@ package com.udacity.gradle.builditbigger;
  * Created by dnbhatia on 1/15/2017.
  */
 
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -13,15 +19,18 @@ import java.util.concurrent.TimeoutException;
 import static junit.framework.Assert.fail;
 
 
+@RunWith(AndroidJUnit4.class)
+public class MainUnitTests {
 
-public class MainUnitTests extends MainActivity {
-
-    CountDownLatch signal = null;
     String joke=null;
+    @Before
+    public void jokeInitialize() {
+        joke = null;
+    }
     @Test
     public void verifyJokeAsyncTaskResponse() {
         EndpointsAsyncTask jokeTask=new EndpointsAsyncTask();
-        jokeTask.execute(this);
+        jokeTask.execute(InstrumentationRegistry.getTargetContext());
         try {
             joke = jokeTask.get(30, TimeUnit.SECONDS);
             assert !joke.isEmpty();
