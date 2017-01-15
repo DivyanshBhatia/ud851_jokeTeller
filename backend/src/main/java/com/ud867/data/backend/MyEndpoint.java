@@ -11,6 +11,7 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 
 import javax.inject.Named;
+import com.ud867.data.utils.jokeFetcher;
 
 /**
  * An endpoint class we are exposing
@@ -37,4 +38,10 @@ public class MyEndpoint {
         return response;
     }
 
+    @ApiMethod(name = "sayJoke")
+    public MyBean sayJoke(){
+        MyBean response = new MyBean();
+        response.setData(jokeFetcher.getJoke());
+        return response;
+    }
 }

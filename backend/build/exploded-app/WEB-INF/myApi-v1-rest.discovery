@@ -1,6 +1,6 @@
 {
  "kind": "discovery#restDescription",
- "etag": "\"ODRTh3xaRR64wpeXJSlF33HMN-0/gcMtloD4SUoaKn0zk5IOxSX1Lq4\"",
+ "etag": "\"ODRTh3xaRR64wpeXJSlF33HMN-0/oMmZFl6dWFboe0I1rnTYIxGzTD4\"",
  "discoveryVersion": "v1",
  "id": "myApi:v1",
  "name": "myApi",
@@ -13,10 +13,10 @@
   "x32": "https://www.gstatic.com/images/branding/product/1x/googleg_32dp.png"
  },
  "protocol": "rest",
- "baseUrl": "https://myApplicationId.appspot.com/_ah/api/myApi/v1/sayHi/",
- "basePath": "/_ah/api/myApi/v1/sayHi/",
+ "baseUrl": "https://myApplicationId.appspot.com/_ah/api/myApi/v1/",
+ "basePath": "/_ah/api/myApi/v1/",
  "rootUrl": "https://myApplicationId.appspot.com/_ah/api/",
- "servicePath": "myApi/v1/sayHi/",
+ "servicePath": "myApi/v1/",
  "batchPath": "batch",
  "parameters": {
   "alt": {
@@ -86,7 +86,7 @@
  "methods": {
   "sayHi": {
    "id": "myApi.sayHi",
-   "path": "{name}",
+   "path": "sayHi/{name}",
    "httpMethod": "POST",
    "parameters": {
     "name": {
@@ -98,6 +98,17 @@
    "parameterOrder": [
     "name"
    ],
+   "response": {
+    "$ref": "MyBean"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "sayJoke": {
+   "id": "myApi.sayJoke",
+   "path": "sayJoke",
+   "httpMethod": "POST",
    "response": {
     "$ref": "MyBean"
    },

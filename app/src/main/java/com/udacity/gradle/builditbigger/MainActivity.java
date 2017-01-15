@@ -9,7 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+/*
+//Solution to step1 : java library
 import com.ud867.data.utils.jokeFetcher;
+ */
+
+
 import com.udacity.nd801.course.androidlib.JokesActivity;
 
 public class MainActivity extends AppCompatActivity {
