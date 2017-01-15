@@ -1,4 +1,4 @@
-package com.ud867.data.utils.test;
+package com.ud867.data.utils.tests;
 
 import com.ud867.data.utils.jokeFetcher;
 import org.junit.Test;

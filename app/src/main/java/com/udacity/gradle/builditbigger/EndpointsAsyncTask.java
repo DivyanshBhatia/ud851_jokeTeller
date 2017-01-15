@@ -11,15 +11,19 @@ import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.ud867.data.backend.myApi.MyApi;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Context... params) {
         if(myApiService == null) {  // Only do this once
+            /*
+            //Step for local server Joke
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                 // options for running against local devappserver
@@ -31,14 +35,15 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
                     public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
                         abstractGoogleClientRequest.setDisableGZipContent(true);
                     }
-                });
+                });*/
                 // end options for devappserver
+            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
+                    .setRootUrl("https://joketeller-155707.appspot.com/_ah/api/");
 
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+        context = params[0];
 
         try {
             return myApiService.sayJoke().execute().getData();
@@ -49,6 +54,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        CustomMessageEvent event=new CustomMessageEvent(result);
+        EventBus.getDefault().post(event);
     }
 }

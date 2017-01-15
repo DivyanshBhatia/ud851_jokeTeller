@@ -8,14 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+
 /*
 //Solution to step1 : java library
 import com.ud867.data.utils.jokeFetcher;
  */
 
 
+//import com.ud867.data.utils.jokeFetcher;
 import com.udacity.nd801.course.androidlib.JokesActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class MainActivity extends AppCompatActivity {
     private static final String JOKE_STRING = "JOKE_STRING";
@@ -35,6 +40,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void doThis(CustomMessageEvent event){
+        launchJokeActivity(event.getCustomJoke());
+    }
+
+    private void launchJokeActivity(String customJoke) {
+
+        Intent jokesIntent=new Intent(this,JokesActivity.class);
+        jokesIntent.putExtra(JOKE_STRING, customJoke);
+        startActivity(jokesIntent);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -49,17 +78,17 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public void tellJoke(View view) {
         //Solution of Step 1
         /*Toast.makeText(this, jokeFetcher.getJoke(), Toast.LENGTH_SHORT).show();*/
 
         //Solution of Step 2
-        /*Intent jokesIntent=new Intent(this,JokesActivity.class);
-        jokesIntent.putExtra(JOKE_STRING,jokeFetcher.getJoke());
-        startActivity(jokesIntent);*/
+        /**/
 
         //Solution of Step 3 learning via GCE
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+        new EndpointsAsyncTask().execute(this);
     }
 
 
