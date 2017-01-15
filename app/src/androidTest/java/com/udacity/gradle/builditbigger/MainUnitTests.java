@@ -6,7 +6,9 @@ package com.udacity.gradle.builditbigger;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.SmallTest;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,11 +17,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-
 import static junit.framework.Assert.fail;
 
 
+
 @RunWith(AndroidJUnit4.class)
+@SmallTest
 public class MainUnitTests {
 
     String joke=null;
@@ -33,7 +36,7 @@ public class MainUnitTests {
         jokeTask.execute(InstrumentationRegistry.getTargetContext());
         try {
             joke = jokeTask.get(30, TimeUnit.SECONDS);
-            assert !joke.isEmpty();
+            Assert.assertNotNull(joke);
         } catch (InterruptedException e) {
             fail("InterruptedException");
         } catch (ExecutionException e) {
