@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger;
+package com.udacity.gradle.builditbigger.paid;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import com.ud867.data.utils.jokeFetcher;
 
 
 //import com.ud867.data.utils.jokeFetcher;
+import com.udacity.gradle.builditbigger.CustomMessageEvent;
+import com.udacity.gradle.builditbigger.EndpointsAsyncTask;
+import com.udacity.gradle.builditbigger.R;
 import com.udacity.nd801.course.androidlib.JokesActivity;
 
 import org.greenrobot.eventbus.EventBus;
