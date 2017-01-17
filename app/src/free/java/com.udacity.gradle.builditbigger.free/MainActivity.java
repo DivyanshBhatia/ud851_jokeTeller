@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 spinner.setVisibility(View.VISIBLE);
             }
         });
+        requestNewInterstitial();
     }
 
     @Override
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         /**/
 
         //Solution of Step 3 learning via GCE
-        Log.v(MainActivity.class.getSimpleName(),"1");
         showInterstitial();
 
     }
