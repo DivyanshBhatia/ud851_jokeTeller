@@ -45,4 +45,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
     testCompile 'org.testng:testng:6.9.6'
+    compile 'com.jakewharton:butterknife-annotations:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
 }

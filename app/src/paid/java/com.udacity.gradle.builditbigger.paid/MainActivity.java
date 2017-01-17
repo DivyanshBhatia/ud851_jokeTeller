@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 /*
 //Solution to step1 : java library
@@ -25,13 +26,21 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
     private static final String JOKE_STRING = "JOKE_STRING";
+    @BindView(R.id.loading_indicator)
+    ProgressBar spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        spinner.setVisibility(View.GONE);
+
     }
 
 
@@ -60,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchJokeActivity(String customJoke) {
-
+        spinner.setVisibility(View.GONE);
         Intent jokesIntent=new Intent(this,JokesActivity.class);
         jokesIntent.putExtra(JOKE_STRING, customJoke);
         startActivity(jokesIntent);
@@ -92,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Solution of Step 3 learning via GCE
         new EndpointsAsyncTask().execute(this);
+        spinner.setVisibility(View.VISIBLE);
     }
 
 
